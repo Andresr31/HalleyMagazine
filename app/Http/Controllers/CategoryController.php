@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
 
-    }
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -40,9 +40,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryPost $request)
+    public function store(Request $request)
     {
-        Category::create($request->validated());
+        //dd($request);
+        Category::create($request->all());
         return back()->with('status','Categoria creado con éxito');
     }
 
@@ -76,9 +77,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategoryPost $request, Category $category)
+    public function update(Request $request, Category $category)
     {
-        $category->update($request->validated());
+        $category->update($request->all());
         return back()->with('status','Categoria modificado con éxito');
     }
 

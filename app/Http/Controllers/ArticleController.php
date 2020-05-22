@@ -11,11 +11,11 @@ use App\Category;
 class ArticleController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
 
-    }
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +23,14 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $article = Article::orderBy('created_at','desc')->paginate(5);
-        return view('dashboard.post.index',['posts'=>$posts]);
+        $articles = Article::orderBy('created_at','desc')->paginate(5);
+        return view('dashboard.articles.index',['articles'=>$articles]);
+    }
+
+    public function guest()
+    {
+        $articles = Article::orderBy('created_at','desc')->where('status','Publicado')->paginate(5);
+        return view('dashboard.articles.index',['articles'=>$articles]);
     }
 
     /**
@@ -44,10 +50,18 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreArticlePost $request)
+    public function store(Request $request)
     {
-        // dd($request->validated());
-        Article::create($request->validated());
+        $article = new Article();
+        $article->name = $request->name;
+        $article->category_id = $request->category_id;
+        $article->description = $request->description;
+        $article->status = $request->status;
+        $article->author = $request->author;
+        $article->review_date =  $request->review_date;
+
+        $article->save();
+
         return back()->with('status','Articulo creado con éxito');
     }
 

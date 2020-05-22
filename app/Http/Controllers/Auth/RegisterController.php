@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -64,8 +65,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd(Auth::id());
+        // $destinationPathImage = "./storage/users/$video->user_id/$video->id/image/";
+        // $image = $request->file('imgFile')->getClientOriginalName() . "." . $request->file('imgFile')->getClientOriginalExtension();
+        // $request->file('imgFile')->move($destinationPathImage, $image);
+        
+        // $video->rutaImagen = $destinationPathImage . $image;
+
         return User::create([
             'name' => $data['name'],
+            'type_document' => $data['type_document'],
+            'document' => $data['document'],
+            'nickname' => $data['nickname'],
+            'birthdate' => $data['birthdate'],
+            'url_profile' => $data['url_profile'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

@@ -7,12 +7,12 @@
                     <h4 class="card-title h2 text-center">Categoria</h4>
                         <div class="col-md-10 my-4 text-light mr-auto ml-auto">
                             <div class="form-group">
-                                <label>Titulo</label>
-                            <input readonly type="text" class="form-control" id="titulo" name="title" value="{{$category->title}}" >
+                                <label>Nombre</label>
+                            <input readonly type="text" class="form-control" id="titulo" name="title" value="{{$category->name}}" >
                             </div>
                             <div class="form-group">
-                                <label>Url</label>
-                                <input readonly type="text" class="form-control" id="url" name="url_clean" value="{{$category->url_clean}}" >
+                                <label>Descripcion</label>
+                                <input readonly type="text" class="form-control" id="url" name="url_clean" value="{{$category->description}}" >
                             </div>
                             <div class="form-group">
                             <a href="{{route('category.index')}}" class="btn btn-block mr-auto ml-auto btn-outline-light mt-3"> Volver</a>

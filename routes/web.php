@@ -24,3 +24,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/articulos', 'ArticleController@guest')->name('article.guest');
+
+Route::post('/user', 'PublicistController@create')->name('create.user');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('dashboard/article','ArticleController');
+    Route::resource('dashboard/category','CategoryController');  
+});

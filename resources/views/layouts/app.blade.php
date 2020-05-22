@@ -34,7 +34,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand mt-2" href="{{ url('/') }}">
-                    <h4>{{ config('app.name', 'NovaBlog') }}</h4>
+                    <h4>{{ config('app.name', 'HalleyMagazine') }}</h4>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -46,11 +46,11 @@
                     @auth
                     <li class="ml-4 nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Post
+                                Articulos
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{route('post.create')}}">Crear</a>
-                                <a class="dropdown-item" href="{{route('post.index')}}">Listar</a>
+                                <a class="dropdown-item" href="{{route('article.create')}}">Crear</a>
+                                <a class="dropdown-item" href="{{route('article.index')}}">Listar</a>
                             </div>
                         </li>
                         <li class="ml-4 nav-item dropdown">
@@ -69,13 +69,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar') }}</a>
+                                <a class="nav-link" href="{{ route('article.guest') }}">{{ __('Ver Articulos') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
-                                </li>
-                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
                         @else
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>

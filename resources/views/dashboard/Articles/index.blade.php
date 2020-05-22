@@ -12,13 +12,15 @@
               </button>
              </div>
            @endif
-            <h4 class="card-title h2 text-center py-3">Posts</h4>
+            <h4 class="card-title h2 text-center py-3">Articulos</h4>
+            @auth
             <div class="row col-md-9 mr-auto ml-auto">
                 <div class="col">
-                    <a href="{{ route('post.create') }}"
+                    <a href="{{ route('article.create') }}"
                         class="btn btn-outline-light btn-block">{{ __('Crear') }}</a>
                 </div>
             </div>
+            @endauth
                 <div class="table-responsive col-md-10 mr-auto ml-auto py-3">
                     <table class="table table-light ">
                         <thead class="thead-dark text-light">
@@ -26,10 +28,10 @@
                                 {{ __('Id') }}
                             </th>
                             <th>
-                                {{ __('Titulo') }}
+                                {{ __('Nombre') }}
                             </th>
                             <th>
-                                {{ __('Posteado') }}
+                                {{ __('Estado') }}
                             </th>
                             <th>
                                 {{ __('Creación') }}
@@ -37,41 +39,45 @@
                             <th>
                                 {{ __('Actualización') }}
                             </th>
-                            <th >
-                                {{ __('Acciones') }}
-                            </th>
+                            @auth
+                                <th >
+                                    {{ __('Acciones') }}
+                                </th>
+                            @endauth
+                            
                         </thead>
                         <tbody>
-                            @foreach($posts as $post)
+                            @foreach($articles as $article)
                                 <tr>
                                     <td>
-                                        {{$post->id}}
+                                        {{$article->id}}
                                     </td>
                                     <td>
-                                        {{$post->title}}
+                                        {{$article->name}}
                                     </td>
                                     <td>
-                                        {{$post->posted}}
+                                        {{$article->status}}
                                     </td>
                                     <td>
-                                        {{$post->created_at->format('d-m-Y')}}
+                                        {{$article->created_at->format('d-m-Y')}}
                                     </td>
                                     <td>
-                                        {{$post->updated_at->format('d-m-Y')}}
+                                        {{$article->updated_at->format('d-m-Y')}}
                                     </td>
 
-                    
-                                <td >
+                                    @auth
+                                    <td >
 
-                                        <a href="{{ route('post.show',$post->id) }}"  data-original-title="" title=""><i class="fas fa-eye icon"></i></a> | <a href="{{ route('post.edit',$post) }}"  data-original-title="" title=""><i class="fas fa-edit icon"></i></a> |<button class="btn btn-link btn-sm" type="button" data-toggle="modal" data-target="#eliminarModal"  data-id="{{$post->id}}"><i class="fas fa-trash-alt icon"></i></button>
+                                        <a href="{{ route('article.show',$article->id) }}"  data-original-title="" title=""><i class="fas fa-eye icon"></i></a> | <a href="{{ route('article.edit',$article) }}"  data-original-title="" title=""><i class="fas fa-edit icon"></i></a> |<button class="btn btn-link btn-sm" type="button" data-toggle="modal" data-target="#eliminarModal"  data-id="{{$article->id}}"><i class="fas fa-trash-alt icon"></i></button>
 
                                     
-                                </td>
+                                    </td>
+                                    @endauth
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{$posts->links()}}
+                    {{$articles->links()}}
                 </div>
             
             
@@ -84,16 +90,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Eliminar categoria</h5>
+            <h5 class="modal-title">Eliminar Articulo</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <p>¿Seguro que desea eliminar el post seleccionado?</p>
+            <p>¿Seguro que desea eliminar el articulo seleccionado?</p>
         </div>
         <div class="modal-footer">                                    
-            <form id="formDelete" action="{{route('post.destroy',0)}}" data-action="{{route('post.destroy',0)}}" method="POST">
+            <form id="formDelete" action="{{route('article.destroy',0)}}" data-action="{{route('article.destroy',0)}}" method="POST">
                 @csrf
                 @method('DELETE')
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -110,7 +116,7 @@
       action=$('#formDelete').attr('data-action').slice(0,-1);
       var modal = $(this)
       $('#formDelete').attr('action',action+id);
-      modal.find('.modal-title').text('Vas a eliminar el Post: ' + id)
+      modal.find('.modal-title').text('Vas a eliminar el Articulo: ' + id)
   })
 </script>
 

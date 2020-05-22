@@ -19,7 +19,7 @@ class CreateArticlesTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('description');
             $table->date('review_date');
-            $table->enum('status',['Publicar','No publicar - revision','Rechazado'])->default('Publicar');
+            $table->enum('status',['Publicado','No publicado - revision','Rechazado'])->default('Publicado');
             $table->string('author');
             $table->string('url_pdf')->nulleable();
             $table->string('url_author')->nulleable();

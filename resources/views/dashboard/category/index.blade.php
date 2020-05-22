@@ -26,7 +26,7 @@
                                 {{ __('Id') }}
                             </th>
                             <th>
-                                {{ __('Titulo') }}
+                                {{ __('Nombre') }}
                             </th>
                             <th>
                                 {{ __('Creación') }}
@@ -45,7 +45,7 @@
                                         {{$category->id}}
                                     </td>
                                     <td>
-                                        {{$category->title}}
+                                        {{$category->name}}
                                     </td>
                                     <td>
                                         {{$category->created_at->format('d-m-Y')}}
@@ -57,7 +57,7 @@
                     
                                 <td >
 
-                                <a href="{{ route('category.show',$category->id) }}"  data-original-title="" title=""><i class="fas fa-eye icon"></i></a> | <a href="{{ route('category.edit',$category) }}"  data-original-title="" title=""><i class="fas fa-edit icon"></i></a> |<button class="btn btn-link btn-sm" type="button" data-toggle="modal" data-target="#eliminarModal"  data-id="{{$category->id}}"><i class="fas fa-trash-alt icon"></i></button>
+                                <a href="{{ route('category.show',$category->id) }}"  data-original-title="" title=""><i class="fas fa-eye icon"></i></a> | <a href="{{ route('category.edit',$category) }}"  data-original-title="" title=""><i class="fas fa-edit icon"></i></a> |<button class="btn btn-link btn-sm" type="button" data-toggle="modal" data-target="#eliminarModal"  data-id="{{$category->id}}" onclick="eliminar({{$category->id}});"><i class="fas fa-trash-alt icon"></i></button>
 
                                     
                                 </td>
@@ -100,14 +100,17 @@
 </div>
 
 <script>
-    $('#eliminarModal').on('show.bs.modal', function (event) {
+    function eliminar(id){
+        $('#eliminarModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
-      var id = button.data('id') 
+      var id = button.data('id')
       action=$('#formDelete').attr('data-action').slice(0,-1);
       var modal = $(this)
       $('#formDelete').attr('action',action+id);
-      modal.find('.modal-title').text('Vas a eliminar el Post: ' + id)
+      modal.find('.modal-title').text('Vas a eliminar la categoria: ' + id)
   })
+    }
+    
 </script>
 
 @endsection

@@ -1,21 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
+<div class="back">
+    <div class="container py-4 ml-auto mr-auto">
+        <div class="row">
+            <div class="col-sm-6">
+            <div class="card card-dark bg-dark text-light">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
+                <h4 class="card-title text-center h2">Post</h4>
+                <p class="card-text text-center">Gestiona post</p>
+                <a href="{{route('post.index')}}" class="btn btn-outline-secondary btn-block">Ver</a>
                 </div>
+            </div>
+            </div>
+            <div class="col-sm-6">
+            <div class="card card-dark bg-dark text-light">
+                <div class="card-body">
+                <h4 class="card-title text-center h2">Categorias</h4>
+                <p class="card-text text-center">Gestiona categorias</p>
+                <a href="{{route('category.index')}}" class="btn btn-outline-secondary btn-block">Ver</a>
+                </div>
+            </div>
             </div>
         </div>
     </div>
